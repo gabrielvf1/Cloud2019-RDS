@@ -43,5 +43,5 @@ db = partial(run_db_query, connection)
 connection.cursor().execute('INSERT INTO Tarefas (Nome) values ("Dormir")')
 connection.cursor().execute('INSERT INTO Tarefas (Nome) values ("Andar")')
 connection.cursor().execute('INSERT INTO Tarefas (Nome) values ("Jogar")')
-
+connection.cursor().execute('COMMIT;')
 db('SELECT * FROM Tarefas')
