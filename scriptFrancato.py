@@ -1,5 +1,15 @@
 import pymysql
 from functools import partial
+import os
+
+f= open("/tmp/dados.txt","r")
+dados = f.readlines()
+for i in dados:
+    linha = i.split()
+    if linha[0] == 'endpoint:':
+        endpoint = linha[1]
+    if linha[0] == 'senha:':
+        senhaDB1 = linha[1]
 
 def run_db_query(connection, query, args=None):
     with connection.cursor() as cursor:
@@ -9,9 +19,9 @@ def run_db_query(connection, query, args=None):
             print(result)
 
 con = pymysql.connect(
-    host='localhost',
-    user='root',
-    password=''
+    host=endpoint,
+    user='AdminFrancato',
+    password=senhaDB1
     )
 
 con.cursor().execute('DROP DATABASE IF EXISTS Cloud')
@@ -25,11 +35,13 @@ CREATE TABLE IF NOT EXISTS `Cloud`.`Tarefas` (
 # ''')
 
 connection = pymysql.connect(
-    host='localhost',
-    user='root',
-    password='',
-    database='cloud')
+    host=endpoint,
+    user='AdminFrancato',
+    password=senhaDB1,
+    database='Cloud')
 db = partial(run_db_query, connection)
 connection.cursor().execute('INSERT INTO Tarefas (Nome) values ("Dormir")')
 connection.cursor().execute('INSERT INTO Tarefas (Nome) values ("Andar")')
 connection.cursor().execute('INSERT INTO Tarefas (Nome) values ("Jogar")')
+
+db('SELECT * FROM Tarefas')
