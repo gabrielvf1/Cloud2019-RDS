@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `Cloud`.`Tarefas` (
  `Nome` VARCHAR(255) NOT NULL,
  PRIMARY KEY (IDTarefa))''')
 # ''')
+conn.cursor().execute('COMMIT;')
 
 connection = pymysql.connect(
     host=endpoint,
