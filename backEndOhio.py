@@ -78,9 +78,13 @@ class TarefaId(Resource):
         return jsonify({"Status": 200})
 
     def delete(self, id):
-        connection.cursor().execute("DELETE FROM Tarefas WHERE IDTarefa = %s", [id])
-        connection.cursor().execute('COMMIT;')
-        return jsonify({"Status": 200})
+        try:
+            connection.cursor().execute("DELETE FROM Tarefas WHERE IDTarefa = %s", [id])
+            connection.cursor().execute('COMMIT;')
+            return jsonify({"Status": 200})
+        except:
+            return jsonify({"Erro": "ID inexistente"})
+            
 
 class HealthCheck(Resource):
     def get(self):
