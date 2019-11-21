@@ -2,7 +2,7 @@ import pymysql
 from functools import partial
 import os
 
-f= open("/tmp/dados.txt","r")
+f= open("/home/dados.txt","r")
 dados = f.readlines()
 for i in dados:
     linha = i.split()
