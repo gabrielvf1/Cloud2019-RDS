@@ -11,7 +11,7 @@ api = Api(app)
 parser = reqparse.RequestParser()
 parser.add_argument('Tarefa', type=str)
 
-f= open("/tmp/dados.txt","r")
+f= open("/home/dados.txt","r")
 dados = f.readlines()
 for i in dados:
     linha = i.split()
